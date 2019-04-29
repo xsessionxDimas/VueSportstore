@@ -6,11 +6,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3 bg-info p2">
-                <h4 class="text-white m-2">Categories</h4>
+            <div class="col-2 bg-info p2">
+                <category-list />
             </div>
-            <div class="col-9 p-2">
-                <ProductList />
+            <div class="col-10 p-2">
+                <product-list />
             </div>
         </div>
     </div>
@@ -18,11 +18,13 @@
 
 <script>
 
-import ProductList from './ProductList.vue';
+import productList from './ProductList.vue';
+import categoryList  from './CategoryList.vue';
 
 export default {
     components: {
-        ProductList
+        productList,
+        categoryList
     }
 }
 </script>
