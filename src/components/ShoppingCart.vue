@@ -58,13 +58,8 @@ export default {
     ...mapGetters({ totalPrice: "cart/totalCost" })
   },
   filters: {
-        /* apply on each element in the arrays data */
-        currency(value) {
-            return new Intl.NumberFormat("en-US", {
-                style: "currency", currency: "USD" 
-            }).format(value);
-        }
-    },
+        
+  },
   methods: {
     ...mapMutations({
       change: "cart/changeQuantity",

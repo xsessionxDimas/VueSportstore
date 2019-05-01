@@ -36,12 +36,7 @@ export default {
         })
     },
     filters: {
-        /* apply on each element in the arrays data */
-        currency(value) {
-            return new Intl.NumberFormat("en-US", {
-                style: "currency", currency: "USD" 
-            }).format(value);
-        }
+        
     },
     methods: {
         ...mapMutations({ addProduct: "cart/addProduct" }),
