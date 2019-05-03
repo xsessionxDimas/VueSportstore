@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card m-1 p 1 bg-light" v-for="p in products" v-bind:key="p.id">
+        <div class="card m-1 p 1 bg-light" v-for="(p, i) in products" v-bind:key="`${i}-${p.id}`">
             <h4>{{p.name + "-" + p.category}} 
                 <span class="badge badge-pill badge-primary float-right mt-1 mr-1">
                     <!-- pipeline angular style -->
@@ -13,8 +13,7 @@
                   v-on:click="handleProductAdd(p)">
                     Add To Cart
                 </button>
-            </div>
-               
+            </div>               
         </div>
         <pager />
     </div>

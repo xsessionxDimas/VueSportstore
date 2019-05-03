@@ -19,7 +19,7 @@ module.exports = function (req, res, next) {
         (((req.url.startsWith("/api/products")
         || req.url.startsWith("/products"))
         || (req.url.startsWith("/api/categories")
-            || req.url.startsWith("/categories"))) && req.method != "GET")
+            || req.url.startsWith("/categories") )) && req.method != "GET")
         || ((req.url.startsWith("/api/orders")
             || req.url.startsWith("/orders")) && req.method != "POST")) {
         let token = req.headers["authorization"];

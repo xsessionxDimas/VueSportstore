@@ -7,16 +7,22 @@
             <option value="12">12 per page</option>
         </select>
     </div>
-    <div class="text-right col" v-if="pageCount > 1">
-      <div class="btn-group mx-2">
-        <button
-          class="btn"
-          v-for="i in pageNumbers"
-          v-bind:key="i"
-          v-bind:class="getClass(i)"
-          v-on:click="setCurrentPage(i)"
-        >{{ i }}</button>
-      </div>
+    <div class="text-right col">
+      <button class="btn btn-secondary mx-1" v-bind:disabled="currentPage == 1">Previous</button>
+      <span v-if="currentPage > 4">
+          <button v-on:click="setCurrentPage(1)" class="btn btn-secondary mx-1">1</button>
+          <span class="h4">...</span>        
+      </span>
+      <span class="mx-1">
+          <button v-for="i in pageNumbers" v-bind:key="i"
+           class="btn mx-1" v-bind:class="getClass(i)"
+           v-on:click="setCurrentPage(i)">{{ i }}</button>
+      </span>
+      <span v-if="currentPage <= pageCount - 4">
+          <span class="h4">...</span>   
+          <button v-on:click="setCurrentPage(pageCount)" v-bind:class="getClass(pageCount)" class="btn btn-secondary mx-1">{{ pageCount }}</button>               
+      </span>
+      <button class="btn btn-secondary mx-1" v-bind:disabled="currentPage == pageCount">Next</button>
     </div>
   </div>
 </template>
@@ -30,7 +36,16 @@ export default {
     ...mapState(["currentPage"]),
     ...mapGetters(["pageCount"]),
     pageNumbers() {
-      return [...Array(this.pageCount + 1).keys()].slice(1);
+      if(this.pageCount <= 4) {
+        return [...Array(this.pageCount + 1).keys()].slice(1);
+      } else if(this.currentPage > this.pageCount - 4) {
+        return [...Array(5).keys()].reverse().map(v => v.this.pageCount - v);
+      } else {
+        if(this.currentPage > 1)
+          return [this.currentPage - 1, this.currentPage, this.currentPage + 1];
+        else
+          return [1,2,3];
+      }
     }
   },
   methods: {
