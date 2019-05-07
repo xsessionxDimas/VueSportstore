@@ -12,7 +12,7 @@ for(let i = 1; i <= 500; i++) {
         name: faker.commerce.productName(),
         category: category,
         description: `${category}: ${faker.lorem.sentence(3)}`,
-        price: fakcer.commerce.price()        
+        price: faker.commerce.price()        
     })
 }
 

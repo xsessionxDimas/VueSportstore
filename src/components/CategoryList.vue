@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row my-2" v-for="c in categories" v-bind:key="c">
             <button class="btn btn-block" 
-                    v-on:click="setCategories(c)"
+                    v-on:click="setCurrentCategory(c)"
                     v-bind:class="getClass(c)">
                     {{ c }}
             </button>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
     computed: {
         ...mapState(["currentCategory"]),
@@ -21,7 +21,7 @@ export default {
         getClass(category) {
             return category == this.currentCategory ? "btn-primary" : "btn-secondary";
         },
-        ...mapMutations(["setCategories"])
+        ...mapActions(["setCurrentCategory"])
     }
 }
 </script>

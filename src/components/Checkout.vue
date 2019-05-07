@@ -88,6 +88,9 @@ export default {
           this.$router.push(`/thanks/${order}`);
       }
     }
+  },
+  created: function() {
+    console.log("Checkout created");
   }
 };
 </script>

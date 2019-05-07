@@ -8,7 +8,7 @@
         </select>
     </div>
     <div class="text-right col">
-      <button class="btn btn-secondary mx-1" v-bind:disabled="currentPage == 1">Previous</button>
+      <button class="btn btn-secondary mx-1" v-on:click="setCurrentPage(currentPage - 1)" v-bind:disabled="currentPage == 1">Previous</button>
       <span v-if="currentPage > 4">
           <button v-on:click="setCurrentPage(1)" class="btn btn-secondary mx-1">1</button>
           <span class="h4">...</span>        
@@ -22,13 +22,13 @@
           <span class="h4">...</span>   
           <button v-on:click="setCurrentPage(pageCount)" v-bind:class="getClass(pageCount)" class="btn btn-secondary mx-1">{{ pageCount }}</button>               
       </span>
-      <button class="btn btn-secondary mx-1" v-bind:disabled="currentPage == pageCount">Next</button>
+      <button class="btn btn-secondary mx-1" v-on:click="setCurrentPage(currentPage + 1)" v-bind:disabled="currentPage == pageCount">Next</button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
@@ -39,7 +39,7 @@ export default {
       if(this.pageCount <= 4) {
         return [...Array(this.pageCount + 1).keys()].slice(1);
       } else if(this.currentPage > this.pageCount - 4) {
-        return [...Array(5).keys()].reverse().map(v => v.this.pageCount - v);
+        return [...Array(5).keys()].reverse().map(v => this.pageCount - v);
       } else {
         if(this.currentPage > 1)
           return [this.currentPage - 1, this.currentPage, this.currentPage + 1];
@@ -52,7 +52,7 @@ export default {
     getClass(page) {
       return page == this.currentPage ? "btn-primary" : "btn-secondary";
     },
-    ...mapMutations(["setCurrentPage", "setPageSize"]),
+    ...mapActions(["setCurrentPage", "setPageSize"]),
     changePageSize($event) {
         this.setPageSize(Number($event.target.value));
     }

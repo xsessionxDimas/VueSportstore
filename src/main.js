@@ -9,6 +9,7 @@ import store  from "./store";
 import router from "./router";
 import Vuelidate from "vuelidate";
 
+
 Vue.filter("currency", (value) =>  new Intl.NumberFormat("en-US", {
   style: "currency", currency: "USD" 
 }).format(value));

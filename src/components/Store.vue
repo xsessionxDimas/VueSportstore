@@ -8,9 +8,14 @@
         </div>
         <div class="row">
             <div class="col-2 bg-info p2">
-                <category-list />
+                <category-list class="mb-5"/>
+                <button class="btn btn-block btn-warning mt-5"
+                        v-on:click="setShowSearch(true)">
+                    Search
+                </button>
             </div>
             <div class="col-10 p-2">
+                <search />
                 <product-list />
             </div>
         </div>
@@ -22,12 +27,23 @@
 import productList   from './ProductList.vue';
 import categoryList  from './CategoryList.vue';
 import cartSummary   from './CartSummary.vue';
+import search        from './Search.vue';
+import { mapMutations, mapActions } from 'vuex';
+
 
 export default {
-    components: {
+    components : {
         productList,
         categoryList,
-        cartSummary
+        cartSummary,
+        search
+    },
+    methods : {
+        ...mapActions(["getData"]),
+        ...mapMutations(["setShowSearch"])
+    },
+    created : function() {
+        this.getData();
     }
 }
 </script>
